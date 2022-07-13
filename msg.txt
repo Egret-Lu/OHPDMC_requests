@@ -1,0 +1,38 @@
+Your data request is ready to download.
+Please save following link(s) via http connection.
+
+file(1): http://ohpdmc.eri.u-tokyo.ac.jp/pub3/breq-fast-nm/D20220713040632-194-16/NM1201102080000.seed   56229888bytes
+
+
+==================================================================
+
+Your request :
+
+.NAME Xinxuan Lu
+.INST University of Rochester
+.MAIL Hutchison Hall 329
+.EMAIL syslucinda@outlook.com
+.PHONE 5854656353
+.LABEL OJP_8
+.END
+
+NM03 PS 2011 02 08 00 00 00.0 2011 02 09 00 00 00.0 1 ???
+
+
+==================================================================
+
+included data :
+
+NM1 NM03 PS HH1 2011/02/08(039) 00:00:00 2011/02/08(039) 23:59:59
+NM1 NM03 PS HH2 2011/02/08(039) 00:00:00 2011/02/08(039) 23:59:59
+NM1 NM03 PS HHZ 2011/02/08(039) 00:00:00 2011/02/08(039) 23:59:59
+
+
+==================================================================
+
+No warning message
+
+
+==================================================================
+
+End of mail body.
