@@ -67,6 +67,7 @@ with open('seedlist.txt','w') as f:
 		raw_email  = b"\n".join(pop.retr(i+1)[1])
 		msg = email.message_from_bytes(raw_email)
 		Eml_from =str(decode_str(msg.get('from')))
+		
 		if (Eml_from != 'breq-fast-nm-admin@ohpdmc.eri.u-tokyo.ac.jp'):
 			continue
 		#	subject title of email
