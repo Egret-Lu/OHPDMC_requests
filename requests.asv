@@ -8,9 +8,10 @@
 % end_date = {'2015 01 01','2015 03 01','2015 05 01','2015 07 01',...
 %     '2015 09 01','2015 11 01','2016 01 01','2016 03 01','2016 05 01','2016 07 01',...
 %     '2016 09 01'};
-stalist={'NM01'};
-start_date={'2011 02 01'};
-end_date={'2011 02 05'};
+stalist={'T01'};
+% 
+start_date={'2007 02 01'};
+end_date={'2007 02 02'};
 
 req_info = {'.NAME Xinxuan Lu','.INST University of Rochester',...
     '.MAIL Hutchison Hall 329','.EMAIL syslucinda@outlook.com',...
@@ -32,7 +33,7 @@ for i = 1:length(stalist)
 %         
         ct = ct + 1;
         
-        fid = fopen('./OJP_req_MATLAB.txt','w');
+        fid = fopen('./NM_req_MATLAB.txt','w');
         
         fprintf(fid,'%s\n',req_info{1});
         fprintf(fid,'%s\n',req_info{2});
@@ -48,13 +49,13 @@ for i = 1:length(stalist)
         
         % choose one
         %         system('cat OJP_req_MATLAB.txt | mail "breq-fast-ojp@ohpdmc.eri.u-tokyo.ac.jp" -- -r"evan.z.0920@gmail.com"');
-        system('cat NM_req_MATLAB.txt | sendmail -f syslucinda@outlook.com breq-fast-nm@ohpdmc.eri.u-tokyo.ac.jp');
+        system(['cat NM_req_MATLAB.txt | sendmail -f evanfaked@gmail.com breq-fast-ssp@ohpdmc.eri.u-tokyo.ac.jp']);
+            %'"breq-fast-ssp@ohpdmc.eri.u-tokyo.ac.jp" -- -r"syslucinda@outlook.,com"']);
         
         fprintf('%s %d %s\n','Request',ct,'Sent');
         
         fclose(fid);
-        
-        pause(10);
+        pause(10)
         
     end
 end
