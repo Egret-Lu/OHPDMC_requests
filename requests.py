@@ -5,6 +5,9 @@ import numpy as np
 import os
 import datetime
 
+import time
+
+
 # %% code cell
 #sta list
 #structure: network, station, startdate,enddate
@@ -21,8 +24,7 @@ req_info='\n'.join(req_info)
 # %% code cell
 # request on rows
 for index, row in sta_df.iterrows():
-    if index>1:
-        break
+    
     startDate=row['Start']
     endDate=row['End']
     net = row['Network']
@@ -30,10 +32,10 @@ for index, row in sta_df.iterrows():
     fileName = f'{net}_req.txt'
     dateCur=startDate
     while dateCur <= endDate:
-        #iterate for each day in range
+        #iterate for each week in range
         #for each station sabtch a request on each day
         dayStart= dateCur
-        dayEnd = dateCur+datetime.timedelta(1)
+        dayEnd = dateCur+datetime.timedelta(weeks=1)
         #SET LABEL FOR EACH REQUEST
         label = '.LABEL '
         label += '_'.join([net,sta,dateCur.strftime("%Y%m%d")])
@@ -54,8 +56,8 @@ for index, row in sta_df.iterrows():
         .END
 
         T01 PS 2007 02 01 00 00 00.0 2007 02 02 00 00 00.0 1 ???
-
         """
+       
         with open(fileName,'w') as f:
             f.write(req_info)
             f.write('\n')
@@ -65,17 +67,9 @@ for index, row in sta_df.iterrows():
             f.write('\n\n')
             f.write(requestStr)
             f.close()
-        #os.system(f'cat {fileName} | mail "breq-fast-{net.lower()}@ohpdmc.eri.u-tokyo.ac.jp" -- -r"syslucinda@outlook.,com"')
-        dateCur+=datetime.timedelta(1)
-    # %%    
-
-
-        
-    
-
-
-
-
-## %%
+        os.system(f'cat {fileName} | mail "breq-fast-{net.lower()}@ohpdmc.eri.u-tokyo.ac.jp" -- -r"syslucinda@outlook.,com"')
+        print(f'submit {[net,sta,dateCur.strftime("%Y%m%d")]}')
+        dateCur+=datetime.timedelta(weeks=1)
+        time.sleep(120)
 
 # %%
