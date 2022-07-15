@@ -67,7 +67,7 @@ for index, row in sta_df.iterrows():
             f.write('\n\n')
             f.write(requestStr)
             f.close()
-        os.system(f'cat {fileName} | mail "breq-fast-{net.lower()}@ohpdmc.eri.u-tokyo.ac.jp" -- -r"syslucinda@outlook.,com"')
+        os.system(f'cat {fileName} | mail "breq-fast-{net.lower()}@ohpdmc.eri.u-tokyo.ac.jp" -- -r"syslucinda@outlook.com"')
         print(f'submit {[net,sta,dateCur.strftime("%Y%m%d")]}')
         dateCur+=datetime.timedelta(1)
         time.sleep(60)
