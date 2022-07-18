@@ -11,7 +11,7 @@ import time
 # %% code cell
 #sta list
 #structure: network, station, startdate,enddate
-sta_df=pd.read_csv('stalist.csv')
+sta_df=pd.read_csv('stalist/tlist.csv')
 sta_df['Start']= pd.to_datetime(sta_df['Start'],format='%Y-%m-%d')
 sta_df['End']= pd.to_datetime(sta_df['End'],format='%Y-%m-%d')
 
@@ -67,7 +67,8 @@ for index, row in sta_df.iterrows():
             f.write('\n\n')
             f.write(requestStr)
             f.close()
-        os.system(f'cat {fileName} | mail "breq-fast-{net.lower()}@ohpdmc.eri.u-tokyo.ac.jp" -- -r"syslucinda@outlook.com"')
+        #remember to set stmp on the system
+        os.system(f'cat {fileName} | mail -s "{label}" breq-fast-{net.lower()}@ohpdmc.eri.u-tokyo.ac.jp')
         print(f'submit {[net,sta,dateCur.strftime("%Y%m%d")]}')
         dateCur+=datetime.timedelta(1)
         time.sleep(60)
