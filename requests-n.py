@@ -11,7 +11,7 @@ import time
 # %% code cell
 #sta list
 #structure: network, station, startdate,enddate
-sta_df=pd.read_csv('stalist/tlist.csv')
+sta_df=pd.read_csv('stalist/nlist.csv')
 sta_df['Start']= pd.to_datetime(sta_df['Start'],format='%Y-%m-%d')
 sta_df['End']= pd.to_datetime(sta_df['End'],format='%Y-%m-%d')
 
@@ -35,7 +35,7 @@ for index, row in sta_df.iterrows():
         #iterate for each week in range
         #for each station sabtch a request on each day
         dayStart= dateCur
-        dayEnd = dateCur+datetime.timedelta(1)
+        dayEnd = dateCur+datetime.timedelta(20)
         #SET LABEL FOR EACH REQUEST
         label = '.LABEL '
         label += '_'.join([net,sta,dateCur.strftime("%Y%m%d")])
@@ -70,7 +70,7 @@ for index, row in sta_df.iterrows():
         #remember to set stmp on the system
         os.system(f'cat {fileName} | mail -s "{label}" breq-fast-{net.lower()}@ohpdmc.eri.u-tokyo.ac.jp')
         print(f'submit {[net,sta,dateCur.strftime("%Y%m%d")]}')
-        dateCur+=datetime.timedelta(1)
+        dateCur+=datetime.timedelta(20)
         time.sleep(60)
 
 # %%
