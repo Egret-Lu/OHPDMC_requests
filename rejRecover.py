@@ -59,29 +59,30 @@ poplist=pop.list()
 
 pattern="\.+(NAME)+[\w\W]+(\?{3})"
 #net mail
-with open('rejectedRequest.txt','w') as f:
-    for i,id in enumerate(poplist[1]):
-        
-        uidl=bytes.decode(id)
-        uid=uidl.split(' ',1)[1]
-        #whole message retrieve
-        raw_email  = b"\n".join(pop.retr(i+1)[1])
-        msg = email.message_from_bytes(raw_email)
-        Eml_from =str(decode_str(msg.get('from')))
-        if (Eml_from!="breq-fast-tiares-admin@ohpdmc.eri.u-tokyo.ac.jp"):
-            continue
-    
-        #    subject title of email
-        subject = decode_str(msg.get("Subject"))
 
-        if (subject!="Breq-Fast has rejected data request"):
-            continue
-        body = msg.get_payload(decode=True)
-        seedFile= re.search(pattern,body.decode("utf-8") )
-        
-        if (seedFile):
-            if ("System busy" in body.decode("utf-8")):
+for i,id in enumerate(poplist[1]):
+    
+    uidl=bytes.decode(id)
+    uid=uidl.split(' ',1)[1]
+    #whole message retrieve
+    raw_email  = b"\n".join(pop.retr(i+1)[1])
+    msg = email.message_from_bytes(raw_email)
+    Eml_from =str(decode_str(msg.get('from')))
+    if (Eml_from!="breq-fast-tiares-admin@ohpdmc.eri.u-tokyo.ac.jp"):
+        continue
+
+    #    subject title of email
+    subject = decode_str(msg.get("Subject"))
+
+    if (subject!="Breq-Fast has rejected data request"):
+        continue
+    body = msg.get_payload(decode=True)
+    seedFile= re.search(pattern,body.decode("utf-8") )
+    
+    if (seedFile):
+        if ("System busy" in body.decode("utf-8")):
+            with open('rejectedRequest.txt','w') as f:
                 f.write(seedFile.group()+'\n')
                 f.close()
-                os.system(f'cat rejectedRequest.txt | mail -s "TIARES" "breq-fast-tiares@ohpdmc.eri.u-tokyo.ac.jp"')
-                time.sleep(120)
+            os.system(f'cat rejectedRequest.txt | mail -s "TIARES" "breq-fast-tiares@ohpdmc.eri.u-tokyo.ac.jp"')
+            time.sleep(120)
