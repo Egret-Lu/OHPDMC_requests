@@ -23,17 +23,19 @@ req_info = ['.NAME Xinxuan Lu','.INST University of Rochester',
 req_info='\n'.join(req_info)
 # %% code cell
 # request on rows
+
 for index, row in sta_df.iterrows():
-    
+
     startDate=row['Start']
     endDate=row['End']
     net = row['Network']
     sta = row['Station']
     fileName = f'{net}_req.txt'
     dateCur=startDate
+    
     while dateCur <= endDate:
         #iterate for each week in range
-        #for each station sabtch a request on each day
+        #for each station sabtch a request on each 20 days
         dayStart= dateCur
         dayEnd = dateCur+datetime.timedelta(20)
         #SET LABEL FOR EACH REQUEST
@@ -57,7 +59,6 @@ for index, row in sta_df.iterrows():
 
         T01 PS 2007 02 01 00 00 00.0 2007 02 02 00 00 00.0 1 ???
         """
-       
         with open(fileName,'w') as f:
             f.write(req_info)
             f.write('\n')
@@ -70,7 +71,8 @@ for index, row in sta_df.iterrows():
         #remember to set stmp on the system
         os.system(f'cat {fileName} | mail -s "{label}" breq-fast-{net.lower()}@ohpdmc.eri.u-tokyo.ac.jp')
         print(f'submit {[net,sta,dateCur.strftime("%Y%m%d")]}')
-        dateCur+=datetime.timedelta(20)
+        #sllep 200 seconds to avoid system busy
         time.sleep(200)
-
+#recursion
+        dateCur+=datetime.timedelta(20)
 # %%
