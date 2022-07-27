@@ -18,7 +18,7 @@ sta_df['End']= pd.to_datetime(sta_df['End'],format='%Y-%m-%d')
 # %%code cell
 #personal information
 req_info = ['.NAME Xinxuan Lu','.INST University of Rochester',
-'.MAIL Hutchison Hall 329','.EMAIL syslucinda@outlook.com',
+'.MAIL Hutchison Hall 329','.EMAIL syslucinda2@outlook.com',
 '.PHONE 5854656353']
 req_info='\n'.join(req_info)
 # %% code cell
@@ -35,7 +35,7 @@ for index, row in sta_df.iterrows():
         #iterate for each week in range
         #for each station sabtch a request on each day
         dayStart= dateCur
-        dayEnd = dateCur+datetime.timedelta(1)
+        dayEnd = dateCur+datetime.timedelta(10)
         #SET LABEL FOR EACH REQUEST
         label = '.LABEL '
         label += '_'.join([net,sta,dateCur.strftime("%Y%m%d")])
@@ -50,7 +50,7 @@ for index, row in sta_df.iterrows():
         .NAME Xinxuan Lu
         .INST University of Rochester
         .MAIL Hutchison Hall 329
-        .EMAIL syslucinda@outlook.com
+        .EMAIL syslucinda2@outlook.com
         .PHONE 5854656353
         .LABEL OJP_1
         .END
@@ -70,7 +70,8 @@ for index, row in sta_df.iterrows():
         #remember to set stmp on the system
         os.system(f'cat {fileName} | mail -s "{label}" breq-fast-{net.lower()}@ohpdmc.eri.u-tokyo.ac.jp')
         print(f'submit {[net,sta,dateCur.strftime("%Y%m%d")]}')
-        dateCur+=datetime.timedelta(1)
-        time.sleep(200)
-
+        dateCur+=datetime.timedelta(10)
+        
+        time.sleep(100)
+        
 # %%
