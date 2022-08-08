@@ -47,7 +47,7 @@ def decode_str(s):
 poplib._MAXLINE=20480
 server='outlook.office365.com'
 port=995
-user='syslucinda@outlook.com'
+user='syslucinda2@outlook.com'
 pswd='200312Az'
 pop=poplib.POP3_SSL(server,port)
 pop.user(user)
@@ -68,7 +68,7 @@ for i,id in enumerate(poplist[1]):
     raw_email  = b"\n".join(pop.retr(i+1)[1])
     msg = email.message_from_bytes(raw_email)
     Eml_from =str(decode_str(msg.get('from')))
-    if (Eml_from!="breq-fast-tiares-admin@ohpdmc.eri.u-tokyo.ac.jp"):
+    if (Eml_from!="breq-fast-ssp-admin@ohpdmc.eri.u-tokyo.ac.jp"):
         continue
 
     #    subject title of email
@@ -84,5 +84,5 @@ for i,id in enumerate(poplist[1]):
             with open('rejectedRequest.txt','w') as f:
                 f.write(seedFile.group()+'\n')
                 f.close()
-            os.system(f'cat rejectedRequest.txt | mail -s "TIARES" "breq-fast-tiares@ohpdmc.eri.u-tokyo.ac.jp"')
-            time.sleep(120)
+            os.system(f'cat rejectedRequest.txt | mail -s "TIARES" "breq-fast-ssp@ohpdmc.eri.u-tokyo.ac.jp"')
+            time.sleep(200)

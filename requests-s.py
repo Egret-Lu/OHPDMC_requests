@@ -35,7 +35,7 @@ for index, row in sta_df.iterrows():
         #iterate for each week in range
         #for each station sabtch a request on each day
         dayStart= dateCur
-        dayEnd = dateCur+datetime.timedelta(10)
+        dayEnd = dateCur+datetime.timedelta(5)
         #SET LABEL FOR EACH REQUEST
         label = '.LABEL '
         label += '_'.join([net,sta,dateCur.strftime("%Y%m%d")])
@@ -70,8 +70,8 @@ for index, row in sta_df.iterrows():
         #remember to set stmp on the system
         os.system(f'cat {fileName} | mail -s "{label}" breq-fast-{net.lower()}@ohpdmc.eri.u-tokyo.ac.jp')
         print(f'submit {[net,sta,dateCur.strftime("%Y%m%d")]}')
-        dateCur+=datetime.timedelta(10)
+        dateCur+=datetime.timedelta(5)
         
-        time.sleep(100)
+        time.sleep(80)
         
 # %%
