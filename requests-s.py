@@ -72,6 +72,6 @@ for index, row in sta_df.iterrows():
         print(f'submit {[net,sta,dateCur.strftime("%Y%m%d")]}')
         dateCur+=datetime.timedelta(5)
         
-        time.sleep(80)
+        time.sleep(10)
         
 # %%
