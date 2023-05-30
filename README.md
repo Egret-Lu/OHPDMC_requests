@@ -11,6 +11,6 @@ stalist file -- all station list with net + station +start time+end time. This i
 
 3. Step 3: wgetJob.py -- use parallel task to download all seed  in seedlist.txt. This will run on bluehive. Currently 20 seed file as a group. Then put the file on the bluehive and submit the task.
 
-* p.s.: rej.Recover.py -- some requests may fail so. You can use this to send request again (also they may fail again but just don't care. That is normal case
+* p.s.: rejRecover.py -- some requests may fail so. You can use this to send request again (also they may fail again but just don't care. That is normal case
 
 Hope my old code can help you anyway ^_^
